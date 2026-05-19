@@ -1,0 +1,194 @@
+[
+  {
+    "programId": "healthcare-support-certificate-demo",
+    "programName": "Healthcare Support Certificate Demo",
+    "credentialType": "Certificate",
+    "totalCredits": 18,
+    "source": {
+      "workbookName": "program courses.xlsx",
+      "importedAt": "demo",
+      "sourceSheetNames": ["demo-normalized"]
+    },
+    "rowsNeedingReview": [],
+    "requirementGroups": [
+      {
+        "id": "ivyt-required",
+        "label": "Student Success Requirement",
+        "requirementType": "required_course",
+        "minCourses": 1,
+        "options": [
+          {
+            "id": "ivyt-111",
+            "courseCode": "IVYT 111",
+            "courseTitle": "Student Success",
+            "credits": 1,
+            "isExactCourse": true,
+            "isWildcard": false,
+            "requiresReview": false,
+            "sourceRows": [1]
+          }
+        ],
+        "sourceRows": [1],
+        "reviewStatus": "ok"
+      },
+      {
+        "id": "math-choice",
+        "label": "Mathematics Requirement",
+        "requirementType": "choose_n_courses",
+        "minCourses": 1,
+        "options": [
+          {
+            "id": "math-123",
+            "courseCode": "MATH 123",
+            "courseTitle": "Quantitative Reasoning",
+            "credits": 3,
+            "isExactCourse": true,
+            "isWildcard": false,
+            "requiresReview": false,
+            "sourceRows": [2]
+          },
+          {
+            "id": "math-135",
+            "courseCode": "MATH 135",
+            "courseTitle": "Finite Math",
+            "credits": 3,
+            "isExactCourse": true,
+            "isWildcard": false,
+            "requiresReview": false,
+            "sourceRows": [3]
+          }
+        ],
+        "sourceRows": [2, 3],
+        "reviewStatus": "ok",
+        "notes": "Choose one math option. Do not treat both as mandatory."
+      },
+      {
+        "id": "humanities-elective",
+        "label": "Humanities Elective",
+        "requirementType": "elective_bucket",
+        "minCredits": 3,
+        "options": [
+          {
+            "id": "phil-102",
+            "courseCode": "PHIL 102",
+            "courseTitle": "Introduction to Ethics",
+            "credits": 3,
+            "isExactCourse": true,
+            "isWildcard": false,
+            "requiresReview": false,
+            "sourceRows": [4]
+          },
+          {
+            "id": "huma-wildcard",
+            "wildcardPattern": "HUMA *",
+            "category": "Humanities",
+            "rawValue": "Approved Humanities elective",
+            "credits": 3,
+            "isExactCourse": false,
+            "isWildcard": true,
+            "requiresReview": false,
+            "sourceRows": [5]
+          }
+        ],
+        "sourceRows": [4, 5],
+        "reviewStatus": "ok",
+        "notes": "Satisfy with any approved 3-credit humanities option."
+      }
+    ]
+  },
+  {
+    "programId": "it-support-aas-demo",
+    "programName": "Information Technology Support AAS Demo",
+    "credentialType": "AAS",
+    "totalCredits": 60,
+    "source": {
+      "workbookName": "program courses.xlsx",
+      "importedAt": "demo",
+      "sourceSheetNames": ["demo-normalized"]
+    },
+    "rowsNeedingReview": [
+      {
+        "programId": "it-support-aas-demo",
+        "sourceSheet": "demo-normalized",
+        "sourceRow": 99,
+        "rawValues": {
+          "requirement": "Select approved technical elective"
+        },
+        "reason": "Ambiguous elective row needs catalog-owner review before authoritative simulation.",
+        "suggestedRequirementType": "unknown_requires_review"
+      }
+    ],
+    "requirementGroups": [
+      {
+        "id": "intro-it-required",
+        "label": "Introductory IT Requirement",
+        "requirementType": "required_course",
+        "minCourses": 1,
+        "options": [
+          {
+            "id": "itsp-132",
+            "courseCode": "ITSP 132",
+            "courseTitle": "IT Support Essentials",
+            "credits": 3,
+            "isExactCourse": true,
+            "isWildcard": false,
+            "requiresReview": false,
+            "sourceRows": [10]
+          }
+        ],
+        "sourceRows": [10],
+        "reviewStatus": "ok"
+      },
+      {
+        "id": "communication-choice",
+        "label": "Communication Requirement",
+        "requirementType": "choose_n_courses",
+        "minCourses": 1,
+        "options": [
+          {
+            "id": "comm-101",
+            "courseCode": "COMM 101",
+            "courseTitle": "Fundamentals of Public Speaking",
+            "credits": 3,
+            "isExactCourse": true,
+            "isWildcard": false,
+            "requiresReview": false,
+            "sourceRows": [11]
+          },
+          {
+            "id": "comm-102",
+            "courseCode": "COMM 102",
+            "courseTitle": "Introduction to Interpersonal Communication",
+            "credits": 3,
+            "isExactCourse": true,
+            "isWildcard": false,
+            "requiresReview": false,
+            "sourceRows": [12]
+          }
+        ],
+        "sourceRows": [11, 12],
+        "reviewStatus": "ok",
+        "notes": "Choose one communication option."
+      },
+      {
+        "id": "technical-elective-review",
+        "label": "Technical Elective Requirement",
+        "requirementType": "unknown_requires_review",
+        "minCredits": 3,
+        "options": [
+          {
+            "id": "technical-elective-raw",
+            "rawValue": "Select approved technical elective",
+            "isExactCourse": false,
+            "isWildcard": false,
+            "requiresReview": true,
+            "sourceRows": [99]
+          }
+        ],
+        "sourceRows": [99],
+        "reviewStatus": "needs_review",
+        "notes": "Do not silently convert this row into a mandatory course."
+      }
+    ]
+  }
+]
