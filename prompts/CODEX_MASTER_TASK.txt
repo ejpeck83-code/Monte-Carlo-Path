@@ -1,0 +1,56 @@
+Build a Next.js TypeScript MVP called Pathway Simulator.
+
+The app should simulate community college degree pathways using fictional/demo/public program-course data. It should allow a user to select a program, select or edit a student profile, run Monte Carlo pathway simulations, and view completion probability, stopout probability, average terms to completion, bottleneck courses, and recommended next-term schedules.
+
+Use local fictional/demo data only for student-level information. Do not add authentication or real student data. Keep the architecture clean so Monte Carlo Tree Search can be added later.
+
+CRITICAL DOMAIN RULE:
+The Ivy Tech program-course workbook must not be treated as a flat list of mandatory courses. Many rows are requirement buckets, alternatives, electives, wildcard course patterns, or choose-one/choose-many groups.
+
+Refactor the data model so each program contains requirementGroups, and each requirementGroup contains options. Completion logic must determine whether requirement groups are satisfied, not whether every course row has been completed.
+
+Do not implement completion as:
+program.requiredCourseIds.every(courseId => completedCourses.includes(courseId))
+
+Implement:
+- TypeScript data types for Course, ProgramCatalog, RequirementGroup, RequirementOption, CourseOffering, StudentProfile, AcademicState, ScheduleAction, SimulationOutcome, SimulationSummary
+- Catalog normalization functions that parse spreadsheet-like rows into requirement groups and options
+- Sample/demo data for two fictional programs: Healthcare Support Certificate and Information Technology Support AAS
+- Simulation engine that:
+  - determines remaining unsatisfied requirement groups
+  - determines eligible courses based on prerequisites and course offerings
+  - generates possible next-term schedules
+  - simulates pass/fail/withdraw outcomes using weighted probabilities
+  - runs at least 1,000 simulations
+  - calculates completion probability, stopout probability, average terms to completion, bottleneck courses, and recommended schedules
+- UI pages/components:
+  - dashboard
+  - program selector
+  - pathway map
+  - student profile form
+  - simulation results panel
+  - bottleneck table
+  - recommendation summary
+- docs/FERPA_AND_ETHICS.md explaining that the MVP uses fictional or de-identified data only and is for pathway improvement, not individual student labeling
+- Unit tests for core requirement-group and simulation functions
+
+Tests must prove:
+1. A choose-one math group is satisfied by one completed math course.
+2. A humanities elective bucket is satisfied by any approved course or enough approved credits.
+3. Wildcard or ambiguous rows are flagged for review.
+4. A student can complete a program without completing every option listed in every group.
+5. Schedule generation chooses among options rather than scheduling every option.
+
+Use the language of pathway resilience, completion probability, bottleneck risk, momentum preservation, and recovery options. Avoid language like dropout prediction or student risk score.
+
+Acceptance criteria:
+1. App runs locally with npm install and npm run dev.
+2. User can run simulations from the UI.
+3. Results update visibly after simulation.
+4. At least three recommended schedules are displayed.
+5. Bottlenecks are ranked by frequency.
+6. Recommendation summary is plain-language and executive/advisor friendly.
+7. All student-level data is fictional/demo/de-identified.
+8. Code is typed, organized, and documented.
+9. Requirement-group tests pass before UI polish.
+10. The app never treats all listed course options as mandatory requirements.
